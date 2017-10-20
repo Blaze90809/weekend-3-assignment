@@ -17,7 +17,16 @@ router.get('/', function(req, res){
             console.log('error connecting to db', errorConnectingToDB);
             res.sendStatus(500);
         } else{
-            var queryText = //fill in database stuff
-        }
+            var queryText = 'SELECT * FROM "TODO list" ORDER BY "ID" ASC;';
+            db.query(queryText, function(errorMakingQuery, result){
+                done();
+                if(errorMakingQuery){
+                    console.log('Error making db query:', errorMakingQuery)
+                    res.sendStatus(500);
+                } else {
+                    res.send(result.rows)
+                }
+            }); 
+        } // end else statement
     })
-})
+}) // end .get route to put database on DOM
