@@ -30,3 +30,5 @@ router.get('/', function(req, res){
         } // end else statement
     })
 }) // end .get route to put database on DOM
+
+module.exports = router;
