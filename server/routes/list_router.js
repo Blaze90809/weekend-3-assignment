@@ -1,5 +1,5 @@
 var express = require('express');
-var pg = require(pg);
+var pg = require('pg');
 
 var router = express.Router();
 var config = {
@@ -9,7 +9,7 @@ var config = {
     max: 10,
     idleTimeoutMillis: 30000
 }
-var pool = new pg.pool(config);
+var pool = new pg.Pool(config);
 
 router.get('/', function(req, res){
     pool.connect(function(errorConnectingToDB, db, done) {
