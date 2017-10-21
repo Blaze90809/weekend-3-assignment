@@ -54,4 +54,24 @@ router.post('/', function(req, res){
     })
 }); //EndPostRoute
 
+router.delete('/:id', function(req, res){
+    var listID = req.params.id;
+     pool.connect(function(errorConnectingToDB, db, done){
+         if(errorConnectingToDB){
+             console.log('error connecting to DB', errorConnectingToDB);
+             res.sendStatus(500);
+         } else {
+             var queryText = 'DELETE FROM "TODO list" WHERE "ID" = $1';
+             db.query(queryText, [listID], function(errorMakingQuery, result){
+                 done();
+                 if(errorMakingQuery){
+                     console.log('error making query', errorMakingQuery);
+                 } else {
+                     res.send(result.rows);
+                 }
+             })
+         }
+     })
+}) //end delete route
+
 module.exports = router;

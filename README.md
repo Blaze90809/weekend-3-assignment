@@ -7,11 +7,11 @@ Steps:
 [X] NPM install, body-parser.
 [X] Source in HTML files, including bootstrap and jquery.
 [X] Write interface that allows user to create a task.
-[ ] Each item should have an option to complete or delete.
-[ ] Create AJAX GET, POST ROUTES.
-[ ] Write code to display to DOM.
-[ ] Create routes.
-[ ] Create data table in SQL.
+[x] Each item should have an option to complete or delete.
+[x] Create AJAX GET, POST ROUTES.
+[x] Write code to display to DOM.
+[ ] Create routes for edit and delete.
+[x] Create data table in SQL.
 [ ] Insert query.
 [ ] Select query.
 [ ] Style project.
