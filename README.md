@@ -10,7 +10,8 @@ Steps:
 [x] Each item should have an option to complete or delete.
 [x] Create AJAX GET, POST ROUTES.
 [x] Write code to display to DOM.
-[ ] Create routes for edit and delete.
+[x] Create route for delete.
+[ ] Create route for edit.
 [x] Create data table in SQL.
 [ ] Insert query.
 [ ] Select query.
