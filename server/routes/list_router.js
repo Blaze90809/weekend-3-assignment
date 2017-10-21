@@ -31,4 +31,27 @@ router.get('/', function(req, res){
     })
 }) // end .get route to put database on DOM
 
+router.post('/', function(req, res){
+    var listItem = req.body;
+    console.log(listItem);
+
+    pool.connect(function(errorConnectingToDB, db, done){
+    if(errorConnectingToDB){
+        console.log('Error posting to DB', errorConnectingToDB);
+        res.sendStatus(500);
+    } else {
+        var queryText = 'INSERT INTO "TODO list" ("task", "completed") VALUES ($1, $2);';
+        db.query(queryText, [listItem.task, listItem.completed], function(errorMakingQuery, result){
+            done();
+            if(errorMakingQuery){
+                console.log('error sending POST', error)
+                res.sendStatus(500);
+            } else {
+              res.send(result.rows);
+            }
+        })
+    }
+    })
+}); //EndPostRoute
+
 module.exports = router;
