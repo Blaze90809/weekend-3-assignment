@@ -1,11 +1,14 @@
 $(document).ready(readyNow);
 
+var editing = false;
+var idIn;
 
 function readyNow(){
     console.log('JQ ready');
     getTasks();
     $('#submit').on('click', readyList);
     $('#taskList').on('click', '.deleteBTN', deleteFunction)
+    $('#taskList').on('click', '.editBTN', editFunction)
 }
 
 
@@ -25,12 +28,23 @@ $.ajax({
 
 //create object to send.
 function readyList(){
+if (editing === true){
+    sendEdits();
+    editing = false;
+    $('#submit').text('Submit');
+    $('#enterTask').val('');
+    $('#editing').text('');
+    
+} else {
+
   var listItem = $('#enterTask').val();
   sendList = {
     task : listItem,
     completed: false,
   }
-  postList(sendList); 
+  postList(sendList);
+  $('#enterTask').val(''); 
+}
 } 
 // end readyList function. Getting ready to send POST route  
 function postList(sendList){
@@ -57,8 +71,9 @@ function appendDom(listItems){
     var taskCompleteButton = '<button class="completeBTN">Task Completed</button>';
     var deleteButton = '<button class="deleteBTN">Delete</button>';
     var editButton = '<button class="editBTN">Edit</button>';
-    var appendVar = '<tr data-id="' + id + '"><td>' + task + '</td><td>' + complete + '</td><td>' + taskCompleteButton + '</td><td>' + deleteButton + '</td><td>' + editButton + '</td>';
-    $('#taskList').append(appendVar);
+    var $appendVar = $('<tr data-id="' + id + '"><td>' + task + '</td><td>' + complete + '</td><td>' + taskCompleteButton + '</td><td>' + deleteButton + '</td><td>' + editButton + '</td>');
+    $appendVar.data('listItems', listItems[i]);
+    $('#taskList').append($appendVar);
     }
     
 } // end Append Dom function
@@ -75,3 +90,30 @@ $.ajax({
     console.log('error deleting', error);
 })
 } // end Delete Function
+
+function editFunction(){
+   idIn = $(this).closest('tr').data('listItems').ID;
+    var taskIn = $(this).closest('tr').data('listItems').task;
+    editing = true;
+    $('#editing').text('Make your edits');
+    $('#enterTask').val(taskIn);
+    $('#submit').text('Approve changes');
+}
+
+function sendEdits(){
+    var listItem = $('#enterTask').val();
+    sendList = {
+      task : listItem,
+      completed: false
+    }
+    $.ajax({
+        method: 'PUT',
+        url: '/getlist/' + idIn,
+        data: sendList
+    }).done(function(response){
+        console.log('PUT route:', response);
+        getTasks();
+    }).fail(function(error){
+        console.log('error sending lists:', error)
+    })
+}//end send edits function

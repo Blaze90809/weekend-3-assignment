@@ -74,4 +74,29 @@ router.delete('/:id', function(req, res){
      })
 }) //end delete route
 
+router.put('/:id', function( req, res){
+    var listID = req.params.id;
+    var listItem = req.body;
+    console.log(listItem);
+    console.log(listID);
+    pool.connect(function(errorConnectingToDB, db, done){
+        if(errorConnectingToDB){
+            console.log('PUT error', errorConnectingToDB);
+            res.sendStatus(500);
+        } else {
+            var queryText = 'UPDATE "TODO list" SET "task" = $1, "completed" = $2 WHERE "ID" = $3;'
+            db.query(queryText, [listItem.task, listItem.completed, listID], function(errorMakingQuery, result){
+                if(errorMakingQuery){
+                    console.log('Error PUT query', errorMakingQuery);
+                    res.sendStatus(500);
+                } else{
+                    res.sendStatus(201);
+                }
+            })
+        }
+    })
+
+
+}); //End PUT route
+
 module.exports = router;
