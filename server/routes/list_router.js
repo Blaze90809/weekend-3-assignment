@@ -9,7 +9,8 @@ var config = {
     max: 10,
     idleTimeoutMillis: 30000
 }
-var pool = new pg.Pool(config);
+var poolModule = require('../public/modules/pool.js');
+var pool = poolModule;
 
 // This function calls all of the list items
 router.get('/', function(req, res){
