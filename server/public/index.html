@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
@@ -10,32 +11,47 @@
     <link rel="stylesheet" href="styles/style.css">
     <title>TO-DO List</title>
 </head>
-<body>
-    <div class="container">
-        <h1>To-do list!</h1>
-      <div id="addList">
-          <div id="editing"></div>
-        <input type="text" id="enterTask" value="" placeholder="Enter task here">
-        <input type="boolean" id="completeBoolean" value="" placeholder="True or False">
-        <button id="submit">Submit</button>
-      </div>
-      <div class="table">
-          <table>
-              <thead>
-                  <tr>
-                      <th>Task to complete</th>
-                      <th>Task completed?</th>
-                      <th>Complete the task</th>
-                      <th>Delete</th>
-                      <th>Edit</th>
-                  </tr>
-              </thead>
-              <tbody id="taskList">
-            
-              </tbody>
-          </table>
 
-      </div>
+<body>
+    <div class="jumbotron">
+        <div class="col-xs-6">
+            <h1>To-do list!</h1>
+        </div>
     </div>
+    <div class="container">
+        <div class="col-xs-12">
+            <div id="addList">
+                <div id="editing">
+                    <p><strong>Enter your to-do list items here and mark whether they are finished or not.</strong></p>
+                </div>
+                <div class="form-group">
+                    <form>
+                    <label for="enterTask">Enter your task here.</label>
+                    <input type="text" class="form-control" id="enterTask" value="" placeholder="Enter task here">
+                </div>
+                <div class="form-group">
+                    <label for="completeBoolean">Is the task done?</label>
+                    <input type="boolean" class="form-control" id="completeBoolean" value="" placeholder="True or False">
+                    <button id="submit">Submit Task</button>
+                </div>
+            </form>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Task to complete</th>
+                        <th>Task completed?</th>
+                        <th>Complete the task</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody id="taskList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </body>
+
 </html>
