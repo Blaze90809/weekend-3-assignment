@@ -41,6 +41,17 @@ if (editing === true){
 
   var listItem = $('#enterTask').val();
   var completed = $('#completeBoolean').val();
+
+  if (listItem == ''){
+      alert( 'Please add a task.');
+      return false;
+  }
+// Not sure why this is not working...
+//   if (completed !== Boolean){
+//       alert ('Please add true or false.')
+//       return false;
+//   }
+
   sendList = {
     task : listItem,
     completed: completed
@@ -48,6 +59,7 @@ if (editing === true){
   postList(sendList);
   $('#enterTask').val(''); 
   $('#completeBoolean').val('');
+
 }
 }; 
 // end readyList function. Getting ready to send POST route  

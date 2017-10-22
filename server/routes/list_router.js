@@ -11,6 +11,7 @@ var config = {
 }
 var pool = new pg.Pool(config);
 
+// This function calls all of the list items
 router.get('/', function(req, res){
     pool.connect(function(errorConnectingToDB, db, done) {
         if(errorConnectingToDB){
@@ -31,6 +32,7 @@ router.get('/', function(req, res){
     })
 }) // end .get route to put database on DOM
 
+// This function posts list items.
 router.post('/', function(req, res){
     var listItem = req.body;
     console.log(listItem);
@@ -54,6 +56,7 @@ router.post('/', function(req, res){
     })
 }); //EndPostRoute
 
+// This function deletes the list items.
 router.delete('/:id', function(req, res){
     var listID = req.params.id;
      pool.connect(function(errorConnectingToDB, db, done){
@@ -74,6 +77,7 @@ router.delete('/:id', function(req, res){
      })
 }) //end delete route
 
+//This function updates the list items.
 router.put('/:id', function( req, res){
     var listID = req.params.id;
     var listItem = req.body;
@@ -99,6 +103,7 @@ router.put('/:id', function( req, res){
 
 }); //End PUT route
 
+// This function marks tasks that are finished.
 router.put('/complete/:id', function (req, res){
     var listID = req.params.id;
     console.log('true or false', listID);
