@@ -99,4 +99,26 @@ router.put('/:id', function( req, res){
 
 }); //End PUT route
 
+router.put('/complete/:id', function (req, res){
+    var listID = req.params.id;
+    console.log('true or false', listID);
+    pool.connect(function(errorConnectingToDB, db, done){
+        if(errorConnectingToDB){
+            console.log('PUT error', errorConnectingToDB);
+            res.sendStatus(500);
+        } else {
+            var queryText = 'UPDATE "TODO list" SET "completed" = TRUE WHERE "ID" = $1;';
+            db.query(queryText, [listID], function(errorMakingQuery, result){
+                if(errorMakingQuery){
+                    console.log('Error PUT query', errorMakingQuery);
+                    res.sendStatus(500)
+                } else{
+                    res.sendStatus(201);
+                }
+            })
+
+        }
+    })
+}); //end PUT route
+
 module.exports = router;
