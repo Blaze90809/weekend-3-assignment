@@ -19,3 +19,11 @@ Steps:
 [X] Select query.
 [X] Style project.
 [X] Add to Heroku.
+
+<h1>Table Setup</h1>
+
+CREATE TABLE "TODO list" (
+"ID" serial primary key,
+"task" varchar(120),
+"completed" boolean
+);
