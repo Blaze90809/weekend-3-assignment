@@ -47,7 +47,7 @@ if (editing === true){
       return false;
   }
 // Not sure why this is not working...
-//   if (completed !== Boolean){
+//   if (completed !== true || false){
 //       alert ('Please add true or false.')
 //       return false;
 //   }
