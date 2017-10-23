@@ -82,13 +82,13 @@ function appendDom(listItems){
     $('#taskList').empty();
     for (var i=0; i<listItems.length; i++){
     if (listItems[i].completed === false){
-    var taskCompleteButton = '<button class="completeBTN">Task Completed</button>';}
+    var taskCompleteButton = '<button class="completeBTN btn-warning">Task Completed</button>';}
     else {taskCompleteButton = ''}
     var id = listItems[i].ID;
     var task = listItems[i].task;
     var complete = listItems[i].completed;
-    var deleteButton = '<button class="deleteBTN">Delete</button>';
-    var editButton = '<button class="editBTN">Edit</button>';
+    var deleteButton = '<button class="deleteBTN btn-danger">Delete</button>';
+    var editButton = '<button class="editBTN btn-info">Edit</button>';
     var $appendVar = $('<tr data-id="' + id + '"><td>' + task + '</td><td>' + complete + '</td><td>' + taskCompleteButton + '</td><td>' + deleteButton + '</td><td>' + editButton + '</td>');
     $appendVar.data('listItems', listItems[i]);
     $('#taskList').append($appendVar);
