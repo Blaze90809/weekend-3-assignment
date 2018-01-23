@@ -36,7 +36,6 @@ router.get('/', function(req, res){
 // This function posts list items.
 router.post('/', function(req, res){
     var listItem = req.body;
-    console.log(listItem);
 
     pool.connect(function(errorConnectingToDB, db, done){
     if(errorConnectingToDB){
@@ -82,8 +81,6 @@ router.delete('/:id', function(req, res){
 router.put('/:id', function( req, res){
     var listID = req.params.id;
     var listItem = req.body;
-    console.log(listItem);
-    console.log(listID);
     pool.connect(function(errorConnectingToDB, db, done){
         if(errorConnectingToDB){
             console.log('PUT error', errorConnectingToDB);
@@ -107,7 +104,6 @@ router.put('/:id', function( req, res){
 // This function marks tasks that are finished.
 router.put('/complete/:id', function (req, res){
     var listID = req.params.id;
-    console.log('true or false', listID);
     pool.connect(function(errorConnectingToDB, db, done){
         if(errorConnectingToDB){
             console.log('PUT error', errorConnectingToDB);

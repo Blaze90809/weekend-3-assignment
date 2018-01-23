@@ -12,18 +12,18 @@ function readyNow(){
     $('#taskList').on('click', '.completeBTN', completeFunction)
 };
 
-
+// OG get route to get list
 function getTasks(){
-console.log('in tasks'); // OG get route to get list
+
 $.ajax({
     type: 'GET',
     url: '/getlist'
 }).done(function(response){
-    console.log('here are your list items:', response);
+    // console.log('here are your list items:', response);
     appendDom(response);
     
 }).fail(function(error){
-    console.log('GET error', error)
+    console.log('GET error', error);
 })
 }; // end of OG get route
 
@@ -47,10 +47,11 @@ if (editing === true){
       return false;
   }
 // Not sure why this is not working...
-//   if (completed !== true || false){
-//       alert ('Please add true or false.')
-//       return false;
-//   }
+  else if (completed !== "true" && completed !== "false"){
+    //   console.log('Trip form control')
+      alert ('Please add true or false.')
+      return false;
+  }
 
   sendList = {
     task : listItem,
@@ -69,7 +70,7 @@ function postList(sendList){
       url: '/getlist',
       data: sendList
   }).done(function(response){
-     console.log('sending this:', sendList);
+    //  console.log('sending this:', sendList);
      getTasks();
   }).fail(function(error){
       console.log('POST error', error);
@@ -78,7 +79,7 @@ function postList(sendList){
 
   //Append list items to the DOM
 function appendDom(listItems){
-    console.log('append DOM time', listItems);
+    // console.log('append DOM time', listItems);
     $('#taskList').empty();
     for (var i=0; i<listItems.length; i++){
     if (listItems[i].completed === false){
@@ -129,7 +130,7 @@ function sendEdits(){
       task : listItem,
       completed: completed
     }
-    console.log('edits', sendList);
+
     $.ajax({
         method: 'PUT',
         url: '/getlist/' + idIn,
@@ -145,14 +146,14 @@ function sendEdits(){
 // This function will mark tasks that are finished.
 function completeFunction(){
 
-    console.log('Task complete clicked');
+
     idIn = $(this).closest('tr').data('listItems').ID;
-    console.log(idIn);
+
     $.ajax({
         method: 'PUT',
         url: '/getlist/complete/' + idIn,
     }).done(function(response){
-       console.log('edit complete', response);
+
        getTasks();
     }).fail(function(error){
         console.log('error marking tasks as finished', error)
